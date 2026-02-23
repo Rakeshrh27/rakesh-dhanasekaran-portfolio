@@ -1,2 +1,2 @@
 # rakesh-dhanasekaran-portfolio
-Portfolio
+Professional portfolio for Rakesh Dhanasekaran - Senior .NET Full-Stack Developer
