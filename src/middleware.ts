@@ -1,19 +1,9 @@
 import createMiddleware from 'next-intl/middleware';
+import { routing } from './navigation';
 
-export default createMiddleware({
-    // A list of all locales that are supported
-    locales: ['en', 'sv'],
-
-    // Used when no locale matches
-    defaultLocale: 'en'
-});
+export default createMiddleware(routing);
 
 export const config = {
-    // Match all pathnames except for
-    // - /api (API routes)
-    // - /_next (Next.js internals)
-    // - /_static (inside /public)
-    // - /_vercel (Vercel internals)
-    // - all files (e.g. favicon.ico)
-    matcher: ['/((?!api|_next|_static|_vercel|[\\w-]+\\.\\w+).*)']
+    // Match only internationalized pathnames
+    matcher: ['/', '/(en|sv)/:path*']
 };
