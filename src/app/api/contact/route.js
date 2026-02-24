@@ -107,3 +107,10 @@ export async function POST(request) {
     );
   }
 }
+
+export async function GET() {
+  return NextResponse.json(
+    { message: 'Contact API is operational. Transmission channel open.', status: 'healthy' },
+    { status: 200 }
+  );
+}

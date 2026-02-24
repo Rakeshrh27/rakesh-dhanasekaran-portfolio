@@ -4,6 +4,6 @@ import { routing } from './navigation';
 export default createMiddleware(routing);
 
 export const config = {
-    // Match only internationalized pathnames
-    matcher: ['/', '/(en|sv)/:path*']
+    // Match all internationalized pathnames, but ignore /api, /_next and static files
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)']
 };
