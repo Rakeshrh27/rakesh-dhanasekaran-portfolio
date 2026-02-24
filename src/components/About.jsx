@@ -1,56 +1,62 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { Card, Badge } from '@/components/ui'
+import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function About() {
+  const t = useTranslations('about')
+  const h = useTranslations('highlights')
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
 
   const achievements = [
-    { value: 40, label: 'Performance Improvement', suffix: '%' },
-    { value: 80, label: 'Test Coverage Increase', suffix: '%' },
-    { value: 50, label: 'Deployment Downtime Reduction', suffix: '%' },
-    { value: 9, label: 'Years Experience', suffix: '+' },
+    { value: 40, label: h('perf'), suffix: '%' },
+    { value: 80, label: h('test'), suffix: '%' },
+    { value: 50, label: h('downtime'), suffix: '%' },
+    { value: 9, label: h('years'), suffix: '+' },
   ]
 
   return (
-    <section ref={ref} className="py-20 bg-white dark:bg-gray-900">
+    <section ref={ref} id="about" className="py-24 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="section-title"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
-          About Me
-        </motion.h2>
+          <h2 className="section-title text-fluid-h2 text-gradient">{t('title')}</h2>
+          <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
+        </motion.div>
 
-        <div className="max-w-3xl mx-auto">
-          <motion.p
-            initial={{ opacity: 0, y: 50 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-gray-600 dark:text-gray-300 mb-12 text-center"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Experienced and results-oriented Senior .NET Developer with over 9 years 
-            of expertise in designing, developing, and deploying scalable, data-centric 
-            web applications for ERP, CRM, and enterprise platforms.
-          </motion.p>
+            <p className="text-xl text-muted-foreground leading-relaxed mb-8">
+              {t('description')}
+            </p>
+          </motion.div>
 
-          {/* Achievement Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {achievements.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                className="achievement-card"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
               >
-                <Counter value={item.value} suffix={item.suffix} />
-                <p className="text-lg font-semibold">{item.label}</p>
+                <Card className="flex flex-col items-center text-center group cursor-default">
+                  <Counter value={item.value} suffix={item.suffix} />
+                  <p className="text-sm font-bold text-muted-foreground group-hover:text-foreground transition-colors uppercase tracking-wider">{item.label}</p>
+                </Card>
               </motion.div>
             ))}
           </div>
@@ -60,15 +66,30 @@ export default function About() {
   )
 }
 
-// Counter Component
 function Counter({ value, suffix }) {
+  const [displayValue, setDisplayValue] = useState(0)
+  const [ref, inView] = useInView({ triggerOnce: true })
+
+  useEffect(() => {
+    if (inView) {
+      let start = 0
+      const duration = 2000
+      const stepTime = Math.abs(Math.floor(duration / value))
+      const timer = setInterval(() => {
+        start += 1
+        setDisplayValue(start)
+        if (start >= value) clearInterval(timer)
+      }, stepTime)
+      return () => clearInterval(timer)
+    }
+  }, [inView, value])
+
   return (
     <motion.span
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="text-4xl font-bold block mb-2"
+      ref={ref}
+      className="text-5xl font-black block mb-2 text-gradient"
     >
-      {value}{suffix}
+      {displayValue}{suffix}
     </motion.span>
   )
 }

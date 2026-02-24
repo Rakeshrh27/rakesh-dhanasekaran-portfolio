@@ -1,41 +1,236 @@
-{
+{
   "nav": {
-    "home": "Home",
-    "experience": "Experience",
-    "projects": "Projects",
-    "blog": "Blog",
-    "contact": "Contact"
+    "home": "Hem",
+    "experience": "Erfarenhet",
+    "projects": "Projekt",
+    "blog": "Blogg",
+    "contact": "Kontakt"
   },
   "hero": {
-    "title": "Senior .NET Full-Stack Developer",
-    "subtitle": "9+ Years Experience | Azure & AI Specialist",
-    "cta1": "View My Work",
-    "cta2": "Read My Blog"
+    "title": "Skapar sömlösa digitala upplevelser",
+    "subtitle": "Senior .NET Full-Stack Utvecklare",
+    "cta1": "Utforska Portfölj",
+    "cta2": "Läs Min Blogg",
+    "downloadCV": "Ladda ner CV"
   },
   "about": {
-    "title": "About Me",
-    "description": "Experienced and results-oriented Senior .NET Developer with over 9 years of expertise in designing, developing, and deploying scalable, data-centric web applications for ERP, CRM, and enterprise platforms."
+    "title": "Om Min Resa",
+    "description": "Erfaren och resultatinriktad Senior .NET-utvecklare med över 9 års expertis inom design, utveckling och driftsättning av skalbara, datacenterade webbapplikationer."
   },
   "skills": {
-    "title": "Technical Skills"
+    "title": "Teknisk Arsenal",
+    "categories": {
+      "cloud": "Molnplattformar",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "ai": "AI & ML",
+      "devops": "DevOps",
+      "database": "Databaser"
+    }
   },
-  "highlights": {
-    "perf": "40% Performance Improvement",
-    "test": "80% Test Coverage Increase",
-    "downtime": "50% Reduction in Deployment Downtime"
+  "experience": {
+    "title": "Karriär Milstolpar",
+    "list": [
+      {
+        "company": "Seyyone Software Solution",
+        "role": "Lead Software Developer",
+        "period": "Jan 2024 - Nuvarande",
+        "location": "Remote",
+        "achievements": [
+          "Ledde modernisering av legacy WPF ERP till .NET 8 microservices, uppnådde 40% prestandaförbättring",
+          "Minskad driftstopp med 50% genom mikrotjänstarkitektur",
+          "Ökad testtäckning till 80% med NUnit och SonarQube"
+        ]
+      },
+      {
+        "company": "Wipro Limited",
+        "role": "Senior Software Engineer",
+        "period": "Mar 2022 - Jan 2024",
+        "location": "Indien",
+        "achievements": [
+          "Migrerade legacy banksystem från .NET Framework 4.0 till .NET 6",
+          "Implementerade CI/CD-pipelines med Azure DevOps och Jenkins",
+          "Satte upp centraliserad loggning med Splunk och Azure Monitor"
+        ]
+      },
+      {
+        "company": "L&T Infotech",
+        "role": "Senior Software Engineer",
+        "period": "Feb 2020 - Mar 2022",
+        "location": "Indien",
+        "achievements": [
+          "Utvecklade AI-förstärkt mediaplattform med AWS Rekognition",
+          "Integrerade OpenAI API för intelligent sökning och metadataextraktion",
+          "Byggde Angular-baserade gränssnitt med RxJS för realtidsbehandling"
+        ]
+      },
+      {
+        "company": "DCM Infotech Limited",
+        "role": "Associate Specialist",
+        "period": "Maj 2018 - Nov 2019",
+        "location": "Indien",
+        "achievements": [
+          "Utvecklade B2B ERP- och CRM-lösningar med ASP.NET MVC 5",
+          "Byggde interaktiva användargränssnitt med Kendo UI och jQuery",
+          "Optimerade SQL Server lagrade procedurer och SSRS-rapporter"
+        ]
+      },
+      {
+        "company": "Laserbeam Software Pvt Ltd",
+        "role": "Programmerare",
+        "period": "Nov 2016 - Mar 2018",
+        "location": "Indien",
+        "achievements": [
+          "Utvecklade full-stack B2B ERP-lösningar",
+          "Skapade interaktiv bot för diagramvisualisering med Google Charts",
+          "Byggde REST API:er för tredjepartsintegrationer"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Mästerverk",
+    "cta": "Visa Detaljer",
+    "list": [
+      {
+        "title": "ERP System Modernisering",
+        "client": "Seyyone Software Solution",
+        "description": "Migrerade legacy WPF ERP-applikation till modern .NET 8 microservices-arkitektur. Detta innebar att de-coupla monolitiska tjänster till skalbara moduler och implementera ett modernt Angular-frontend.",
+        "achievements": [
+          "40% prestandaförbättring i databehandling",
+          "50% minskning av driftstopp vid driftsättning via CI/CD",
+          "80% testtäckning med NUnit"
+        ],
+        "technologies": [
+          ".NET 8",
+          "Angular",
+          "Azure",
+          "Microservices"
+        ],
+        "color": "from-blue-500 to-indigo-600"
+      },
+      {
+        "title": "AI Mediaplattform",
+        "client": "L&T Infotech",
+        "description": "Utvecklade en molnbaserad mediehanteringsplattform som utnyttjar AI för automatiserad metadataextraktion och ansiktsanalys. Använde AWS Rekognition och OpenAI.",
+        "achievements": [
+          "Integrerade AWS Rekognition för ansiktsanalys",
+          "OpenAI API för intelligenta sökfunktioner",
+          "Realtidsinstrumentpaneler för medietillgångar"
+        ],
+        "technologies": [
+          ".NET Core",
+          "Angular",
+          "AWS",
+          "OpenAI"
+        ],
+        "color": "from-emerald-500 to-teal-600"
+      },
+      {
+        "title": "Banksystem Migration",
+        "client": "Wipro Limited",
+        "description": "Ledde migrationen av kritiska banksystem från .NET Framework 4.0 till .NET 6. Fokus på hög tillgänglighet, säkerhetsefterlevnad och prestandaoptimering.",
+        "achievements": [
+          "Betydande förbättring av systemskalbarhet",
+          "Fullt automatiserade CI/CD-pipelines med Azure DevOps",
+          "Centraliserad loggning och övervakning med Splunk"
+        ],
+        "technologies": [
+          ".NET 6",
+          "Azure",
+          "React",
+          "DevOps"
+        ],
+        "color": "from-orange-500 to-rose-600"
+      },
+      {
+        "title": "Affiliate Marknadsplats",
+        "client": "Seyyone Software Solution",
+        "description": "Arkitekterade och byggde en serverlös marknadsplatsplattform med Next.js och Supabase. Designad för hög skalbarhet för att hantera säsongsbetonade trafiktoppar.",
+        "achievements": [
+          "API-first serverlös arkitektur på Vercel",
+          "Integrerade betalningsportar och säljarens instrumentpaneler",
+          "Dynamisk skalning för att hantera 10x trafiktoppar"
+        ],
+        "technologies": [
+          "Next.js",
+          "Supabase",
+          "Vercel",
+          "TypeScript"
+        ],
+        "color": "from-pink-500 to-purple-600"
+      }
+    ]
+  },
+  "certifications": {
+    "title": "Yrkeslegitimationer",
+    "list": [
+      {
+        "name": "Microsoft Certified: Azure AI Fundamentals",
+        "issuer": "Microsoft",
+        "year": "2024"
+      },
+      {
+        "name": "Microsoft Certified: Azure Data Engineer Associate",
+        "issuer": "Microsoft",
+        "year": "2023"
+      },
+      {
+        "name": "Microsoft Certified: Azure Developer Associate",
+        "issuer": "Microsoft",
+        "year": "2023"
+      },
+      {
+        "name": "Microsoft Certified: Azure Solutions Architect Expert",
+        "issuer": "Microsoft",
+        "year": "2024"
+      }
+    ]
   },
   "blog": {
-    "title": "Latest Articles",
-    "readMore": "Read More →",
-    "articles": {
-      "certs": {
-        "title": "How I Earned 5 Microsoft Azure Certifications in 2 Years",
-        "desc": "My journey to becoming Microsoft certified in Azure AI, Data Engineering, and Development."
+    "title": "Senaste Insikter",
+    "feedLabel": "Live Intelligence Feed",
+    "readMore": "Läs Artikel",
+    "cta": "Visa Fullständig Publikation",
+    "ctaLabel": "Bläddra Bland All Intelligence",
+    "list": [
+      {
+        "title": "Hur jag tjänade 5 Microsoft Azure-certifieringar på 2 år",
+        "category": "Karriär",
+        "date": "15 feb 2024",
+        "excerpt": "Min resa mot att bli Microsoft-certifierad inom Azure AI, Data Engineering och Development.",
+        "readTime": "8 min läsning"
       },
-      "ftax": {
-        "title": "A Complete Guide to F-Tax for IT Consultants in Sweden",
-        "desc": "Everything you need to know about registering for F-tax as a self-employed IT consultant."
+      {
+        "title": "En komplett guide till F-skatt för IT-konsulter i Sverige",
+        "category": "Frilans",
+        "date": "10 jan 2024",
+        "excerpt": "Allt du behöver veta om att registrera dig för F-skatt som egenföretagare inom IT.",
+        "readTime": "12 min läsning"
       }
+    ]
+  },
+  "contact": {
+    "title": "Låt oss bygga något",
+    "subtitle": "För närvarande tillgänglig för selektiva samarbeten på senior nivå och arkitektoniska konsultationer.",
+    "form": {
+      "name": "Fullständigt Namn",
+      "email": "E-postadress",
+      "subject": "Ämne",
+      "message": "Projektinformation",
+      "submit": "Skicka Förfrågan",
+      "sending": "Överför...",
+      "success": "Meddelande Mottaget"
+    },
+    "info": {
+      "location": "Sverige / Remote",
+      "availability": "Tillgänglig för Projekt"
     }
+  },
+  "highlights": {
+    "perf": "Prestandaförbättring",
+    "test": "Ökad Testtäckning",
+    "downtime": "Minskad Driftstopp vid Driftsättning",
+    "years": "Års Erfarenhet"
   }
 }

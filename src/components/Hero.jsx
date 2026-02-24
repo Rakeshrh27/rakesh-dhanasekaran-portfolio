@@ -1,122 +1,172 @@
 'use client'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
+import { Button, Badge } from '@/components/ui'
+import { useTranslations } from 'next-intl'
+import HeroVisual from './HeroVisual'
 
 export default function Hero() {
-  return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated Background */}
-      <motion.div
-        className="absolute inset-0 opacity-10"
-        animate={{
-          background: [
-            'radial-gradient(circle at 0% 0%, #E8BABD 0%, transparent 50%)',
-            'radial-gradient(circle at 100% 100%, #E8BABD 0%, transparent 50%)',
-            'radial-gradient(circle at 0% 100%, #E8BABD 0%, transparent 50%)',
-            'radial-gradient(circle at 100% 0%, #E8BABD 0%, transparent 50%)',
-          ],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      />
+  const t = useTranslations('hero')
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  })
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, 200])
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -150])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
+
+  const [resumeFilename, setResumeFilename] = useState('resume.pdf')
+
+  useEffect(() => {
+    const fetchActiveResume = async () => {
+      try {
+        const res = await fetch('/api/resume/metadata')
+        if (res.ok) {
+          const versions = await res.json()
+          const activeVersion = versions.find(v => v.status === 'active')
+          if (activeVersion) {
+            setResumeFilename(activeVersion.filename)
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch active resume')
+      }
+    }
+    fetchActiveResume()
+  }, [])
+
+  return (
+    <section ref={containerRef} id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
+      <HeroVisual />
+      {/* Parallax Background Blobs */}
+      <motion.div
+        style={{ y: y1 }}
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+      >
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 90, 0],
+            x: [0, 100, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-primary/10 blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            scale: [1.2, 1, 1.2],
+            rotate: [0, -90, 0],
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-secondary/10 blur-[120px]"
+        />
+      </motion.div>
+
+      <motion.div
+        style={{ opacity, scale, y: y2 }}
+        className="container mx-auto px-4 py-16 relative z-10"
+      >
         <div className="flex flex-col items-center text-center">
-          {/* Avatar with Float Animation */}
+          {/* Avatar with Halo Effect */}
           <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, type: "spring" }}
-            className="mb-8 relative"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1, type: "spring", bounce: 0.5 }}
+            className="mb-10 relative group"
           >
-            <div className="w-48 h-48 rounded-full bg-gradient-to-br from-[#0A66C2] to-[#E8BABD] p-1">
-              <div className="w-full h-full rounded-full bg-white dark:bg-gray-800 flex items-center justify-center">
-                <span className="text-4xl font-bold text-[#0A66C2]">RD</span>
+            <div className="w-40 h-40 md:w-52 md:h-52 rounded-full p-1 bg-gradient-to-tr from-primary via-secondary to-accent animate-spin-slow">
+              <div className="w-full h-full rounded-full bg-background flex items-center justify-center overflow-hidden">
+                <span className="text-5xl md:text-6xl font-black text-gradient">RD</span>
               </div>
             </div>
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 0.8, 0.5],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="absolute inset-0 rounded-full bg-[#E8BABD] blur-xl -z-10"
-            />
+            {/* Glossy Overlay */}
+            <div className="absolute inset-0 rounded-full border border-white/20 pointer-events-none" />
           </motion.div>
 
-          {/* Title with Slide Up */}
+          {/* Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="flex gap-3 mb-6"
+          >
+            <Badge className="bg-primary/20 text-primary border-primary/30">9+ Years Experience</Badge>
+            <Badge className="bg-secondary/20 text-secondary border-secondary/30">Azure & AI Specialist</Badge>
+          </motion.div>
+
+          {/* Title */}
           <motion.h1
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold text-[#0A66C2] mb-4"
+            className="text-fluid-h1 font-black mb-6 tracking-tighter"
           >
-            Rakesh Dhanasekaran
+            I'm <span className="text-gradient glitch-text" data-text="Rakesh">Rakesh</span>
           </motion.h1>
 
-          {/* Subtitle with Slide Up */}
+          {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-2xl md:text-3xl text-gray-600 dark:text-gray-300 mb-4"
+            className="text-fluid-p text-muted-foreground max-w-2xl mb-12 font-medium leading-relaxed"
           >
-            Senior .NET Full-Stack Developer
+            {t('title')} as a <span className="text-foreground font-bold">Senior .NET Full-Stack Developer</span>.
           </motion.p>
-
-          {/* Experience Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex gap-2 mb-8"
-          >
-            <span className="bg-[#E8BABD] text-[#0A66C2] px-4 py-2 rounded-full text-sm font-semibold">
-              9+ Years Experience
-            </span>
-            <span className="bg-[#0A66C2] text-white px-4 py-2 rounded-full text-sm font-semibold">
-              Azure & AI Specialist
-            </span>
-          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4"
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-6 items-center"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-[#0A66C2] text-white px-8 py-3 rounded-lg 
-                       hover:bg-[#E8BABD] hover:text-[#0A66C2] 
-                       transition-all duration-300 font-semibold"
+            <a
+              href={`/resumes/${resumeFilename}`}
+              download
+              className="clickable group relative"
             >
-              View My Work
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-[#E8BABD] text-[#0A66C2] px-8 py-3 rounded-lg 
-                       hover:bg-[#0A66C2] hover:text-white 
-                       transition-all duration-300 font-semibold"
-            >
-              Read My Blog
-            </motion.button>
-          </motion.div>
+              <Button variant="solid" className="text-lg px-10 w-full sm:w-auto relative overflow-hidden">
+                <span className="relative z-10 flex items-center gap-2">
+                  <svg className="w-5 h-5 group-hover:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  {t('downloadCV')}
+                </span>
+              </Button>
+            </a>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          >
-            <div className="w-6 h-10 border-2 border-[#0A66C2] rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-[#0A66C2] rounded-full mt-2" />
+            <div className="flex gap-4">
+              <a href="#projects" className="clickable whitespace-nowrap">
+                <Button variant="glass" className="text-sm px-6">
+                  {t('cta1')}
+                </Button>
+              </a>
+              <a href="#blog" className="clickable whitespace-nowrap">
+                <Button variant="glass" className="text-sm px-6">
+                  {t('cta2')}
+                </Button>
+              </a>
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
+
+      {/* Modern Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        style={{ opacity: useTransform(scrollYProgress, [0, 0.1], [1, 0]) }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Scroll to explore</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent" />
+      </motion.div>
     </section>
   )
 }

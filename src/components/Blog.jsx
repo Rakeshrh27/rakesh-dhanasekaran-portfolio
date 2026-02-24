@@ -1,144 +1,144 @@
 'use client'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-
-const blogPosts = [
-  {
-    title: 'How I Earned 5 Microsoft Azure Certifications in 2 Years',
-    category: 'Career',
-    date: 'March 15, 2025',
-    readTime: '5 min read',
-    excerpt: 'My journey to becoming Microsoft certified in Azure AI, Data Engineering, and Development.',
-    image: '/blog/certifications.jpg',
-    color: 'from-[#0A66C2] to-[#E8BABD]'
-  },
-  {
-    title: 'A Complete Guide to F-Tax for IT Consultants in Sweden',
-    category: 'Sweden',
-    date: 'March 10, 2025',
-    readTime: '8 min read',
-    excerpt: 'Everything you need to know about registering for F-tax as a self-employed IT consultant.',
-    image: '/blog/ftax.jpg',
-    color: 'from-[#E8BABD] to-[#0A66C2]'
-  },
-  {
-    title: 'Migrating Legacy ERP Systems to .NET 8 Microservices',
-    category: 'Technical',
-    date: 'March 5, 2025',
-    readTime: '10 min read',
-    excerpt: 'How we achieved 40% performance improvement and 50% less downtime.',
-    image: '/blog/microservices.jpg',
-    color: 'from-[#0A66C2] to-[#E8BABD]'
-  },
-  {
-    title: 'Integrating OpenAI with .NET: A Practical Guide',
-    category: 'AI',
-    date: 'February 28, 2025',
-    readTime: '7 min read',
-    excerpt: 'Building intelligent features with OpenAI API and .NET Core.',
-    image: '/blog/openai.jpg',
-    color: 'from-[#E8BABD] to-[#0A66C2]'
-  }
-]
+import { Card, Badge, Button } from '@/components/ui'
+import { useTranslations } from 'next-intl'
 
 export default function Blog() {
+  const t = useTranslations('blog')
+  const [articles, setArticles] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   })
 
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch('/api/news')
+        const data = await response.json()
+        setArticles(data)
+      } catch (error) {
+        console.error('Failed to load news')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    if (inView) {
+      fetchNews()
+    }
+  }, [inView])
+
   return (
-    <section ref={ref} className="py-20 bg-gray-50 dark:bg-gray-800">
+    <section ref={ref} id="blog" className="py-24 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <motion.h2
-          initial={{ opacity: 0, y: 50 }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="section-title"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
-          Latest Articles
-        </motion.h2>
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+            <span className="text-[10px] uppercase font-black tracking-widest text-primary/60">{t('feedLabel')}</span>
+          </div>
+          <h2 className="section-title text-fluid-h2 text-gradient">{t('title')}</h2>
+          <div className="h-1 w-20 bg-primary mx-auto rounded-full" />
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {blogPosts.map((post, index) => (
-            <motion.article
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="blog-card group cursor-pointer"
-            >
-              {/* Image Placeholder with Gradient */}
-              <div className={`h-48 bg-gradient-to-r ${post.color} relative overflow-hidden`}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <AnimatePresence mode="wait">
+            {isLoading ? (
+              // Skeleton Loading State
+              [...Array(3)].map((_, i) => (
                 <motion.div
-                  animate={{
-                    scale: [1, 1.1, 1],
-                    rotate: [0, 5, -5, 0],
-                  }}
-                  transition={{ duration: 10, repeat: Infinity }}
-                  className="absolute inset-0 opacity-20"
-                  style={{
-                    backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.2"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-                  }}
-                />
-                
-                {/* Category Tag */}
-                <motion.span
-                  whileHover={{ scale: 1.1 }}
-                  className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0A66C2] px-3 py-1 rounded-full text-sm font-semibold"
+                  key={`skeleton-${i}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                 >
-                  {post.category}
-                </motion.span>
-                
-                {/* Date Badge */}
-                <span className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs">
-                  {post.date}
-                </span>
-              </div>
+                  <Card className="p-0 overflow-hidden border-none bg-muted/10 h-[380px] animate-pulse">
+                    <div className="p-10 flex flex-col h-full space-y-6">
+                      <div className="flex justify-between">
+                        <div className="w-20 h-4 bg-primary/10 rounded" />
+                        <div className="w-16 h-4 bg-muted rounded" />
+                      </div>
+                      <div className="space-y-3">
+                        <div className="w-full h-8 bg-muted rounded" />
+                        <div className="w-2/3 h-8 bg-muted rounded" />
+                      </div>
+                      <div className="space-y-2">
+                        <div className="w-full h-4 bg-muted/50 rounded" />
+                        <div className="w-full h-4 bg-muted/50 rounded" />
+                        <div className="w-3/4 h-4 bg-muted/50 rounded" />
+                      </div>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))
+            ) : (
+              articles.map((post, index) => (
+                <motion.div
+                  key={post.id || index}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                >
+                  <a href={post.link} target="_blank" rel="noopener noreferrer" className="block h-full group">
+                    <Card className="p-0 overflow-hidden border-none bg-muted/20 hover:bg-muted/30 transition-all duration-500 h-full flex flex-col">
+                      <div className="p-8 md:p-10 flex flex-col h-full">
+                        <div className="flex justify-between items-start mb-6">
+                          <Badge variant="glass" className="bg-primary/10 text-primary border-primary/20 text-[10px] uppercase font-black">
+                            {post.category}
+                          </Badge>
+                          <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{post.readTime}</span>
+                        </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-[#0A66C2] mb-2 group-hover:text-[#E8BABD] transition-colors">
-                  {post.title}
-                </h3>
-                
-                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                  {post.excerpt}
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500">{post.readTime}</span>
-                  
-                  <motion.button
-                    whileHover={{ x: 5 }}
-                    className="text-[#0A66C2] font-semibold flex items-center gap-2 group-hover:text-[#E8BABD] transition-colors"
-                  >
-                    Read More
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </motion.button>
-                </div>
-              </div>
-            </motion.article>
-          ))}
+                        <h3 className="text-xl md:text-2xl font-black mb-4 leading-tight group-hover:text-primary transition-colors line-clamp-2">
+                          {post.title}
+                        </h3>
+                        <p className="text-muted-foreground mb-8 line-clamp-3 text-sm leading-relaxed">
+                          {post.excerpt}
+                        </p>
+
+                        <div className="mt-auto flex justify-between items-center pt-6 border-t border-border/10">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">{post.date}</span>
+                          <span className="text-xs font-black uppercase tracking-widest text-primary flex items-center gap-2 group-hover:gap-4 transition-all">
+                            {t('readMore')}
+                            <span>→</span>
+                          </span>
+                        </div>
+                      </div>
+                    </Card>
+                  </a>
+                </motion.div>
+              ))
+            )}
+          </AnimatePresence>
         </div>
 
-        {/* View All Button */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center mt-12"
+          transition={{ delay: 1 }}
+          className="mt-16 text-center"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-[#0A66C2] text-white px-8 py-3 rounded-lg hover:bg-[#E8BABD] hover:text-[#0A66C2] transition-all duration-300 font-semibold"
+          <a
+            href="https://dev.to/search?q=dotnet+angular+react+azure+aws+sqlserver+mysql+events"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block"
           >
-            View All Articles
-          </motion.button>
+            <Button variant="outline" className="px-12 group">
+              <span className="flex items-center gap-2">
+                {t('ctaLabel')}
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </span>
+            </Button>
+          </a>
         </motion.div>
       </div>
     </section>

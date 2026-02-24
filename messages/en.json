@@ -1,0 +1,236 @@
+{
+  "nav": {
+    "home": "Home",
+    "experience": "Experience",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Creating seamless digital experiences",
+    "subtitle": "Senior .NET Full-Stack Developer",
+    "cta1": "Explore Portfolio",
+    "cta2": "Read My Blog",
+    "downloadCV": "Download Resume"
+  },
+  "about": {
+    "title": "About My Journey",
+    "description": "Experienced and results-oriented Senior .NET Developer with over 9 years of expertise in designing, developing, and deploying scalable, data-centric web applications for ERP, CRM, and enterprise platforms."
+  },
+  "skills": {
+    "title": "Technical Arsenal",
+    "categories": {
+      "cloud": "Cloud Platforms",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "ai": "AI & ML",
+      "devops": "DevOps",
+      "database": "Database"
+    }
+  },
+  "experience": {
+    "title": "Career Milestone",
+    "list": [
+      {
+        "company": "Seyyone Software Solution",
+        "role": "Lead Software Developer",
+        "period": "Jan 2024 - Present",
+        "location": "Remote",
+        "achievements": [
+          "Led modernization of legacy WPF ERP to .NET 8 microservices, achieving 40% performance improvement",
+          "Reduced deployment downtime by 50% through microservices architecture",
+          "Increased test coverage to 80% using NUnit and SonarQube"
+        ]
+      },
+      {
+        "company": "Wipro Limited",
+        "role": "Senior Software Engineer",
+        "period": "Mar 2022 - Jan 2024",
+        "location": "India",
+        "achievements": [
+          "Migrated legacy banking systems from .NET Framework 4.0 to .NET 6",
+          "Implemented CI/CD pipelines with Azure DevOps and Jenkins",
+          "Set up centralized logging with Splunk and Azure Monitor"
+        ]
+      },
+      {
+        "company": "L&T Infotech",
+        "role": "Senior Software Engineer",
+        "period": "Feb 2020 - Mar 2022",
+        "location": "India",
+        "achievements": [
+          "Developed AI-enhanced media platform with AWS Rekognition",
+          "Integrated OpenAI API for intelligent search and metadata extraction",
+          "Built Angular-based interfaces with RxJS for real-time processing"
+        ]
+      },
+      {
+        "company": "DCM Infotech Limited",
+        "role": "Associate Specialist",
+        "period": "May 2018 - Nov 2019",
+        "location": "India",
+        "achievements": [
+          "Developed B2B ERP and CRM solutions using ASP.NET MVC 5",
+          "Built interactive UIs with Kendo UI and jQuery",
+          "Optimized SQL Server stored procedures and SSRS reports"
+        ]
+      },
+      {
+        "company": "Laserbeam Software Pvt Ltd",
+        "role": "Programmer",
+        "period": "Nov 2016 - Mar 2018",
+        "location": "India",
+        "achievements": [
+          "Developed full-stack B2B ERP solutions",
+          "Created interactive chart visualization bot using Google Charts",
+          "Built REST APIs for third-party integrations"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Masterpieces",
+    "cta": "View Details",
+    "list": [
+      {
+        "title": "ERP System Modernization",
+        "client": "Seyyone Software Solution",
+        "description": "Migrated legacy WPF ERP application to modern .NET 8 microservices architecture. This involved decoupling monolithic services into scalable modules, optimizing database queries, and implementing a modern Angular frontend.",
+        "achievements": [
+          "40% performance improvement in data processing",
+          "50% reduction in deployment downtime via CI/CD",
+          "80% unit test coverage with NUnit"
+        ],
+        "technologies": [
+          ".NET 8",
+          "Angular",
+          "Azure",
+          "Microservices"
+        ],
+        "color": "from-blue-500 to-indigo-600"
+      },
+      {
+        "title": "AI Media Platform",
+        "client": "L&T Infotech",
+        "description": "Developed a cloud-native media management platform that leverages AI for automated metadata extraction and facial analysis. Used AWS Rekognition for image analysis and OpenAI for intelligent content search.",
+        "achievements": [
+          "Integrated AWS Rekognition for facial analysis",
+          "OpenAI API for intelligent search capabilities",
+          "Real-time processing dashboards for media assets"
+        ],
+        "technologies": [
+          ".NET Core",
+          "Angular",
+          "AWS",
+          "OpenAI"
+        ],
+        "color": "from-emerald-500 to-teal-600"
+      },
+      {
+        "title": "Banking System Migration",
+        "client": "Wipro Limited",
+        "description": "Led the migration of critical banking systems from .NET Framework 4.0 to .NET 6. The project focused on high availability, security compliance, and performance optimization for high-volume transactions.",
+        "achievements": [
+          "Significant improvement in system scalability",
+          "Fully automated CI/CD pipelines with Azure DevOps",
+          "Centralized logging and monitoring with Splunk"
+        ],
+        "technologies": [
+          ".NET 6",
+          "Azure",
+          "React",
+          "DevOps"
+        ],
+        "color": "from-orange-500 to-rose-600"
+      },
+      {
+        "title": "Affiliate Marketplace",
+        "client": "Seyyone Software Solution",
+        "description": "Architected and built a serverless marketplace platform using Next.js and Supabase. Designed for high scalability to handle seasonal traffic spikes while maintaining low latency for global users.",
+        "achievements": [
+          "API-first serverless architecture on Vercel",
+          "Integrated payment gateways and merchant dashboards",
+          "Dynamic scaling to handle 10x traffic spikes"
+        ],
+        "technologies": [
+          "Next.js",
+          "Supabase",
+          "Vercel",
+          "TypeScript"
+        ],
+        "color": "from-pink-500 to-purple-600"
+      }
+    ]
+  },
+  "certifications": {
+    "title": "Professional Credentials",
+    "list": [
+      {
+        "name": "Microsoft Certified: Azure AI Fundamentals",
+        "issuer": "Microsoft",
+        "year": "2024"
+      },
+      {
+        "name": "Microsoft Certified: Azure Data Engineer Associate",
+        "issuer": "Microsoft",
+        "year": "2023"
+      },
+      {
+        "name": "Microsoft Certified: Azure Developer Associate",
+        "issuer": "Microsoft",
+        "year": "2023"
+      },
+      {
+        "name": "Microsoft Certified: Azure Solutions Architect Expert",
+        "issuer": "Microsoft",
+        "year": "2024"
+      }
+    ]
+  },
+  "blog": {
+    "title": "Latest Insights",
+    "feedLabel": "Live Intelligence Feed",
+    "readMore": "Read Article",
+    "cta": "View Full Publication",
+    "ctaLabel": "Browse All Intelligence",
+    "list": [
+      {
+        "title": "How I Earned 5 Microsoft Azure Certifications in 2 Years",
+        "category": "Career",
+        "date": "Feb 15, 2024",
+        "excerpt": "My journey to becoming Microsoft certified in Azure AI, Data Engineering, and Development.",
+        "readTime": "8 min read"
+      },
+      {
+        "title": "A Complete Guide to F-Tax for IT Consultants in Sweden",
+        "category": "Freelance",
+        "date": "Jan 10, 2024",
+        "excerpt": "Everything you need to know about registering for F-tax as a self-employed IT consultant.",
+        "readTime": "12 min read"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Let's Build Something",
+    "subtitle": "Currently available for selective senior-level collaborations and architectural consultations.",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "subject": "Subject",
+      "message": "Project Details",
+      "submit": "Send Mission Request",
+      "sending": "Transmitting...",
+      "success": "Message Received"
+    },
+    "info": {
+      "location": "Sweden / Remote",
+      "availability": "Open for Projects"
+    }
+  },
+  "highlights": {
+    "perf": "Performance Improvement",
+    "test": "Test Coverage Increase",
+    "downtime": "Deployment Downtime Reduction",
+    "years": "Years Experience"
+  }
+}
