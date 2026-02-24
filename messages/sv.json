@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "home": "Home",
+    "experience": "Experience",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Senior .NET Full-Stack Developer",
+    "subtitle": "9+ Years Experience | Azure & AI Specialist",
+    "cta1": "View My Work",
+    "cta2": "Read My Blog"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "Experienced and results-oriented Senior .NET Developer with over 9 years of expertise in designing, developing, and deploying scalable, data-centric web applications for ERP, CRM, and enterprise platforms."
+  },
+  "skills": {
+    "title": "Technical Skills"
+  },
+  "highlights": {
+    "perf": "40% Performance Improvement",
+    "test": "80% Test Coverage Increase",
+    "downtime": "50% Reduction in Deployment Downtime"
+  },
+  "blog": {
+    "title": "Latest Articles",
+    "readMore": "Read More →",
+    "articles": {
+      "certs": {
+        "title": "How I Earned 5 Microsoft Azure Certifications in 2 Years",
+        "desc": "My journey to becoming Microsoft certified in Azure AI, Data Engineering, and Development."
+      },
+      "ftax": {
+        "title": "A Complete Guide to F-Tax for IT Consultants in Sweden",
+        "desc": "Everything you need to know about registering for F-tax as a self-employed IT consultant."
+      }
+    }
+  }
+}
